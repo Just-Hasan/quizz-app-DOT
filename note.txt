@@ -1,0 +1,48 @@
+STATE EXPLANATION : 
+
+- DATA_RECEIVED
+  Questions data have been received and status turns to ready
+
+- DATA_FAILED
+  status becomes error
+
+- START
+  status becomes active and secondsRemaining property got populated by the length of questions array * secs per question
+
+- ANSWER
+  Check for the answer user choose and compare it to the correct answer of the question, if it's true then increment the correctAnswer by 1, if it's not, increment the false answer by 1.
+
+  Since we immediately wanna go to the next question after we answer, that mean in this state the index will also got incremented
+
+  Checking the answer right or wrong :
+  If the selected answer is the correct answer, increment correct property by 1, if it's not increment incorrect by 1
+
+- TICK 
+  Basically reducing the times
+
+
+- Mekanisme Highscore = seconds remaining + answered question
+
+
+- When browser's closed mechanism :
+
+  const quiz = {
+    questions: [],
+    correctAnswer: 0,
+    highscore: null,
+    incorrectAnswer: 0,
+    status: "loading",
+    index: 0,
+    secondsRemaining: 0,
+    answer: null,
+  };
+
+1. To apply this mechanism, the questions we got from the API must be put inside of questions property, why? because if we don't and fetch another one, the order of the questions will be randomize again.
+
+2. When the application is executed, the quiz value of a certain user is used as the initial value of the useReducer hook
+
+3. That initial value will of course be updated like for the tick, the index, and etc, but it won't be updated to the local storage.
+
+4. But if the user close the browser, update the quiz value of the current user with the value that's used while the application is running, makes sure that the status to paused
+
+5. When the user finish the quiz, there's an option to retake the quiz
