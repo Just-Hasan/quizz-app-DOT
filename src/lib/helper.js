@@ -10,7 +10,7 @@ export const validateEmail = (email) => {
   if (!email) {
     return "Email is required";
   }
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const emailPattern = /^[^\s@]+@gmail\.com$/;
   return emailPattern.test(email) || "Invalid email address";
 };
 

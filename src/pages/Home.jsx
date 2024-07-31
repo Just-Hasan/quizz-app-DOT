@@ -88,7 +88,7 @@ export default function Home() {
             ...user,
             quiz: {
               ...state,
-              status: state.status !== "active" ? state.status : "pause",
+              status: state.status === "active" ? "pause" : state.status,
             },
           }
         : { ...user }

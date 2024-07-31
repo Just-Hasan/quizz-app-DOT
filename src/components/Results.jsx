@@ -29,7 +29,13 @@ export default function Results() {
 
   const { width, height } = useWindowSize();
 
-  let score = secondsRemaining * correctAnswer;
+  let score;
+
+  if (secondsRemaining >= 1) {
+    score = secondsRemaining * correctAnswer;
+  } else {
+    score = correctAnswer * (100 / 15);
+  }
 
   const currentUserHighscore = usersHighscore.find((user) => {
     return (

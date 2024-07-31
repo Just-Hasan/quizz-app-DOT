@@ -14,7 +14,6 @@ const QuizState = {
   PAUSE: "pause",
   RESUME: "resume",
   RETAKE: "retake",
-  UPDATE_PROFILE: "update_profile",
 };
 
 const initialState = {
@@ -86,7 +85,7 @@ function reducer(state, action) {
       return {
         ...state,
         secondsRemaining: state.secondsRemaining - 1,
-        status: state.secondsRemaining === 0 ? "finish" : state.status,
+        status: state.secondsRemaining < 1 ? "finish" : state.status,
       };
     case QuizState.RESUME:
       if (state.index === 15) {

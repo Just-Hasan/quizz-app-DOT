@@ -36,9 +36,10 @@ export default function Login() {
         toast.error("Incorrect password", {
           style: { backgroundColor: "#fa5252", color: "#fff5f5" },
         });
+      } else {
+        setCurrentUser({ username: user?.username, email: user?.email });
+        setTimeout(() => navigate("/home"), 1500);
       }
-      setCurrentUser({ username: user?.username, email: user?.email });
-      setTimeout(() => navigate("/home"), 1500);
     } catch (error) {
       console.log(error);
     }

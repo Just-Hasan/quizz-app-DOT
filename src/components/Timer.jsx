@@ -5,6 +5,7 @@ export default function Timer() {
   const { secondsRemaining, dispatch, QuizState } = useQuiz();
   const mins = Math.floor(secondsRemaining / 60);
   const seconds = secondsRemaining % 60;
+
   useEffect(() => {
     const id = setInterval(() => {
       return dispatch({ type: QuizState.TICK });
