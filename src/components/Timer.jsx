@@ -13,7 +13,11 @@ export default function Timer() {
     return () => clearInterval(id);
   }, [QuizState.TICK, dispatch]);
   return (
-    <div className="text-[#f8f9fa] text-3xl absolute bottom-[10%] left-[50%] translate-x-[-50%]">
+    <div
+      className={`${
+        secondsRemaining <= 60 ? "text-red-500" : "text-[#1c1c1c]"
+      }  py-4 px-8 rounded-full bg-[#f8f9fa] text-3xl absolute bottom-[10%] left-[50%] translate-x-[-50%]`}
+    >
       {mins.toString().padStart(2, "0")} : {seconds.toString().padStart(2, "0")}
     </div>
   );

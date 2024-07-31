@@ -26,7 +26,7 @@ const initialState = {
   incorrectAnswer: 0,
 };
 
-const SECS_PER_QUESTION = 30;
+const SECS_PER_QUESTION = 15;
 
 ////////[current user]
 const currentUser = JSON.parse(localStorage.getItem("dot_quizz_current_user"));

@@ -16,7 +16,7 @@ export default function Leaderboard() {
               className="bg-[#f4f4f4]  text-6xl rounded-xl flex justify-between p-4 text-[#1c2470] w-full "
             >
               <span>
-                {i < 3 ? (
+                {i < 3 && user.highscore !== 0 ? (
                   <FaTrophy
                     className={` ${
                       i === 0
