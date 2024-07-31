@@ -1,15 +1,14 @@
-import { useEffect } from "react";
-import { useQuiz } from "../hooks/useQuiz";
-import StartButton from "../components/StartButton";
 import axios from "axios";
+import { useEffect } from "react";
+import { Beforeunload } from "react-beforeunload";
+import { useNavigate } from "react-router-dom";
 import Question from "../components/Question";
 import QuestionAnswerOptions from "../components/QuestionAnswerOptions";
 import Results from "../components/Results";
+import StartButton from "../components/StartButton";
 import Timer from "../components/Timer";
-import Navbar from "../components/Navbar";
-import { useNavigate } from "react-router-dom";
-import { Beforeunload } from "react-beforeunload";
 import useLocalStorage from "../hooks/useLocalStorage";
+import { useQuiz } from "../hooks/useQuiz";
 
 export default function Home() {
   const { QuizState, dispatch, status, state } = useQuiz();
@@ -98,46 +97,43 @@ export default function Home() {
   }
 
   return (
-    <div className="w-[55%] mx-auto  overflow-hidden">
+    <>
       <Beforeunload onBeforeunload={handleBeforeUnload} />
-      <div className="h-[100dvh] relative flex flex-col gap-4">
-        <Navbar />
-        <div className=" text-[#f4f4f4] text-center  h-[100%] grid place-content-center">
-          <div>
-            {/* Ready State */}
-            {status === "ready" && (
-              <div>
-                <h1 className=" text-7xl font-semibold text-[#1e266e] p-4">
-                  Are you ready to start your quizz?
-                </h1>
-                <StartButton />
-              </div>
-            )}
+      <div className=" text-[#f4f4f4] text-center  h-[100%] grid place-content-center">
+        <div>
+          {/* Ready State */}
+          {status === "ready" && (
+            <div>
+              <h1 className=" text-7xl font-semibold text-[#1e266e] p-4">
+                Are you ready to start your quizz?
+              </h1>
+              <StartButton />
+            </div>
+          )}
 
-            {/* Active State */}
-            {status === "active" && (
-              <div className="absolute top-1/2 translate-y-[-50%] w-full left-0">
-                <Question />
-                <QuestionAnswerOptions />
-              </div>
-            )}
+          {/* Active State */}
+          {status === "active" && (
+            <div className="absolute top-1/2 translate-y-[-50%] w-full left-0">
+              <Question />
+              <QuestionAnswerOptions />
+            </div>
+          )}
 
-            {/* Finish Status */}
-            {status === "finish" && <Results />}
+          {/* Finish Status */}
+          {status === "finish" && <Results />}
 
-            {/* Pause status */}
-            {status === "pause" && (
-              <button
-                onClick={() => dispatch({ type: QuizState.RESUME })}
-                className="text-6xl bg-[#1e266e] px-8 py-6 shadow-xl hover:bg-[#f4f4f4] hover:text-[#1e266e] transition-all ease-in-out rounded-full"
-              >
-                Resume Quiz
-              </button>
-            )}
-          </div>
+          {/* Pause status */}
+          {status === "pause" && (
+            <button
+              onClick={() => dispatch({ type: QuizState.RESUME })}
+              className="text-6xl bg-[#1e266e] px-8 py-6 shadow-xl hover:bg-[#f4f4f4] hover:text-[#1e266e] transition-all ease-in-out rounded-full"
+            >
+              Resume Quiz
+            </button>
+          )}
         </div>
-        {status === "active" && <Timer></Timer>}
       </div>
-    </div>
+      {status === "active" && <Timer></Timer>}
+    </>
   );
 }

@@ -43,7 +43,12 @@ export default function SignUp() {
         });
       } else {
         const hashPass = await hashPassword(password);
-        const newUser = { ...data, password: hashPass, quiz };
+        const newUser = {
+          ...data,
+          profile_picture: "",
+          password: hashPass,
+          quiz,
+        };
         setUsers((user) => [newUser, ...user]);
         toast.success("Sign Up Complete", {
           style: { backgroundColor: "#51cf66", color: "#ebfbee" },

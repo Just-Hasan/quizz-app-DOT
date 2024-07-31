@@ -1,6 +1,5 @@
-import { createContext, useEffect } from "react";
 import PropTypes from "prop-types";
-import { useReducer } from "react";
+import { createContext, useEffect, useReducer } from "react";
 import { useNavigate } from "react-router-dom";
 import { shuffleArr } from "../lib/helper";
 
@@ -15,6 +14,7 @@ const QuizState = {
   PAUSE: "pause",
   RESUME: "resume",
   RETAKE: "retake",
+  UPDATE_PROFILE: "update_profile",
 };
 
 const initialState = {
@@ -28,8 +28,10 @@ const initialState = {
 
 const SECS_PER_QUESTION = 30;
 
+////////[current user]
 const currentUser = JSON.parse(localStorage.getItem("dot_quizz_current_user"));
 
+////////[User's quiz]
 const currentUserQuiz = JSON.parse(
   localStorage.getItem("dot_quizz_user")
 )?.find(
@@ -41,12 +43,14 @@ function reducer(state, action) {
   const question = state?.questions?.at(state.index);
   switch (action.type) {
     case QuizState.DATA_RECEIVED:
-      // indicating that there's already questions in the questions array
       if (state.status === "pause") {
         return { ...state };
       }
-
-      return { ...state, questions: action.payload.data, status: "ready" };
+      return {
+        ...state,
+        questions: shuffleArr(action.payload.data),
+        status: "ready",
+      };
     case QuizState.DATA_FAILED:
       return { ...state, status: "error" };
     case QuizState.START:
@@ -100,6 +104,7 @@ function reducer(state, action) {
         questions: shuffleArr(state.questions),
         secondsRemaining: state.questions.length * SECS_PER_QUESTION,
       };
+
     default:
       break;
   }

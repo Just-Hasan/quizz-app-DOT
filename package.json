@@ -13,6 +13,7 @@
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
     "@mui/material": "^5.16.5",
+    "antd": "^5.19.4",
     "axios": "^1.7.2",
     "bcryptjs": "^2.4.3",
     "he": "^1.2.0",

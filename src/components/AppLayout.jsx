@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
+import Navbar from "./Navbar";
 
 export default function AppLayout() {
   const navigate = useNavigate();
@@ -14,8 +15,11 @@ export default function AppLayout() {
   }, [currentUser?.username, navigate, currentUser?.email]);
 
   return (
-    <div>
-      <Outlet />
+    <div className="w-[55%] mx-auto  overflow-hidden">
+      <div className="h-[100dvh] relative flex flex-col gap-4">
+        <Navbar />
+        <Outlet />
+      </div>
     </div>
   );
 }

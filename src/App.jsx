@@ -3,6 +3,7 @@ import AppLayout from "./components/AppLayout";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import SignUp from "./pages/Signup";
+import Leaderboard from "./pages/Leaderboard";
 
 export default function App() {
   return (
@@ -13,7 +14,7 @@ export default function App() {
         <Route path="/signup" index element={<SignUp />}></Route>
         <Route path="/home" element={<AppLayout />}>
           <Route index element={<Home />} />
-          <Route path="/home/dashboard" element={<p>siu</p>} />
+          <Route path="/home/leaderboard" element={<Leaderboard />} />
         </Route>
       </Routes>
     </>
