@@ -22,14 +22,6 @@ export default function Login() {
     }
   }, [currentUser, navigate]);
 
-  /*
-  1. Find the user via email first
-  2. If the user doesn't exist, that means the email isn't registered yet
-  3. But if it does, proceed to check the plain password, verify it with the hashed password
-  4. If it's correct, then log in the user
-  5. If it's not give notification that the password is incorrect
-  */
-
   async function onSubmit(data) {
     try {
       const user = users?.find((user) => user.email === data.email);

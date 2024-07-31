@@ -9,7 +9,7 @@ import StartButton from "../components/StartButton";
 import Timer from "../components/Timer";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { useQuiz } from "../hooks/useQuiz";
-
+import "../styles/loader.css";
 export default function Home() {
   const { QuizState, dispatch, status, state } = useQuiz();
 
@@ -102,6 +102,14 @@ export default function Home() {
       <div className=" text-[#f4f4f4] text-center  h-[100%] grid place-content-center">
         <div>
           {/* Ready State */}
+
+          {status === "loading" && (
+            <div>
+              <span className="loader"></span>
+              <p className="text-3xl mt-8 text-[#232d82]">Loading</p>
+            </div>
+          )}
+
           {status === "ready" && (
             <div>
               <h1 className=" text-7xl font-semibold text-[#1e266e] p-4">
